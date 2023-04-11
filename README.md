@@ -2,7 +2,7 @@
 
 #Proposal
 
-The field we are interested in working with Covid Vaccines in US states. Covid has effected everyone's lives and it would be impactful to find about its vaccines distribution. The data we would be working with is a data collected for US states Covid vaccine provided by Kaggle.com. The dataset contains more than 100 unique records.
+The field we are interested in working with Covid Vaccines in US states. Covid has affected everyone's lives and it would be impactful to find about its vaccines distribution. The data we would be working with is a data collected for US states Covid vaccine provided by Kaggle.com. The dataset contains more than 100 unique records.
 
 We will scrape the dataset and will perform all the analysis including data visualizations for data sets. [data_cleaning.ipynb]
 
