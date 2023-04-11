@@ -18,6 +18,6 @@ While this subject could be studied indefinitely, we decided the following quest
 
 3. Total number of people fully vaccinated(including percentage).
 
-4. Daily doses of vaccines provided.
+4. People vaccinated per month
 
 These are the main takeways we found based on the dataset, each file will go into further detail in their respective markdown tabs.
