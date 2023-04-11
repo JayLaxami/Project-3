@@ -10,7 +10,8 @@ Data Source: (https://www.kaggle.com/datasets/paultimothymooney/usa-covid19-vacc
 
 Analysis
 
-Firstly, data is cleaned and dataframe is saved as CSV and read in database SQL postgress. Using Flask in python, an API call is made and storing this endpont API as URL on which GET request is performed using d3 json. After getting json response, plot the maps(Leaflet) and other visualization of bar charts using interactions such as drop-down, hover menu. 
+Firstly, data is cleaned and dataframe is saved as CSV and read in database SQL postgress. Using Flask in python, an API call is made and storing this endpont API as URL on which GET request is performed using d3 json. After getting json response, plot the maps(Leaflet) and other visualization of bar charts(chartjs) 
+using interactions such as drop-down, hover menu. 
 
 While this subject could be studied indefinitely, we decided the following questions to be the best topics for the project:
 
