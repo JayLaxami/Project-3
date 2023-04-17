@@ -7,7 +7,6 @@ from sqlite3 import connect
 from sqlalchemy import create_engine
 import psycopg2
 import sqlite3
-from sqlalchemy.orm import sessionmaker
 # from flask_sqlalchemy import SQLAlchemy
 # 2. Create an app, being sure to pass __name__
 app = Flask(__name__)
@@ -24,7 +23,14 @@ def Country():
     engine = create_engine('postgresql://postgres:addycole#422@localhost/world_vaccination_data')
     conn = engine.connect()
     #df = pd.read_sql('global_vaccine', engine, index_col='Country')
-    result = conn.execute('select * from global_vaccine')
+    result = conn.execute('''SELECT
+                            json_build_object(
+                              'type', 'FeatureCollection',
+                              'features', json_agg(ST_AsGeoJSON(t.*)::json)
+                            ) 
+                            FROM 
+                                global_vaccine as t
+                        ''')
     data = [dict(row) for row in result]
     conn.close()
     #json_string = df.to_json(orient='index')
