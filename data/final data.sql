@@ -1,4 +1,4 @@
-P TABLE vaccine2
+DROP TABLE vaccine2
 CREATE TABLE vaccine2 (
 	id INT NOT NULL,
 	location VARCHAR NOT NULL,
