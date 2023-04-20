@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Choroplethmap</title>
+
+    <!-- Leaflet CSS & JS-->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+
+     <script src="https://cdn.jsdelivr.net/gh/timwis/leaflet-choropleth/dist/leaflet-choropleth.min.js"></script> -->
+  <!--  <script src="https://github.com/timwis/leaflet-choropleth/blob/gh-pages/dist/choropleth.js"></script> -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+</head>
+
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <div id="map" style="width:600px; height: 400px;"></div>
+    <!-- <script type="./module" src="./c.js"></script> -->
+    <!-- <script type="./module" src="./c.js"></script> -->
+
+<script type="text/javascript">
+    let url = "http://127.0.0.1:5000/api/v1.0/people_fully_vaccinated";
+    var map = L.map('map').setView([37.8, -96], 4);
+
+var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+//L.geoJson(statesData).addTo(map);
+
+d3.json(url).then(function (geojsonData) {
+    console.log(geojsonData)
+    createFeatures(geojsonData);
+}).catch(function(error) {
+    console.log(error);
+});
+function createFeatures(geojsonData) {
+    let features = [];
+     console.log("here-1")
+    for (let i = 0; i < Object.keys(geojsonData.location).length; i++) {
+         console.log("here-2")
+        let feature = {
+            "type": "Feature",
+            "properties": {
+                "location": geojsonData.location[i],
+                "people_fully_vaccinated": geojsonData.people_fully_vaccinated[i].toLocaleString("en-US")
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [geojsonData.longitude[i], geojsonData.latitude[i]]
+            }
+        };
+        features.push(feature);
+    }
+    function onEachFeature(feature, layer) {
+        layer.bindPopup(`<h3>Fully Vaccinated: ${feature.properties.people_fully_vaccinated}</h3>`);
+    }
+    let geojson = {
+        "type": "FeatureCollection",
+        "features": features
+    };
+    let geojsonLayer = L.choropleth(geojson, {
+        valueProperty: 'people_fully_vaccinated',
+        scale: ['white', 'green'],
+        steps: 6,
+        mode: 'q',
+        style: {
+            color: '#fff',
+            weight: 2,
+            fillOpacity: 0.7
+        },
+        onEachFeature: onEachFeature
+    });
+    createMap(geojsonLayer);
+}
+function createMap(geojsonLayer) {
+    console.log("here-3")
+    let topo = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: false
+    });
+    let myMap = L.map("map", {
+        center: [48.74894534, -69.52148437],
+        zoom: 4,
+        layers: [topo, geojsonLayer]
+    });
+    let baseMaps = {
+        "Topographic Map": topo
+    };
+    let overlayMaps = {
+        "Choropleth Map": geojsonLayer
+    };
+    console.log(myMap)
+    L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+}
+</script>
+</body>
+
+</html>

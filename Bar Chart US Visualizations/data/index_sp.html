@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Covid Vaccination across USA</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <div class="container" style="width:90%;">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Covid vaccinations chart</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+
+      <script src="static/js/plots.js"></script>
+      <!-- "C:\Users\17372\Documents\UT Bootcamp\Module Challenges\Project-3\Project3_SP\static\js\plots.js" -->
+      <script>plotTotalVaccinations("total_vaccinations");</script>
+
+      <table style="width:100%; height:35%;";>
+      <!-- Row 1 - Begin -->
+        <tr style="width:100%; height:auto; vertical-align: top">
+            <th style="width:10%; height:auto; vertical-align: top">
+                <div class="panel-title">Chart Type</div>          
+                <select id="selDataset" onchange="plotTotalVaccinations(this.value)">
+                  <option value="total_vaccinations">Total Vaccinations per state</option>
+                  <option value="people_fully_vaccinated">Number of people fully vaccinated</option>
+                  <!-- <option value="people_vaccinated">TBD</option> -->
+                </select>
+              </th>
+
+            <th style="width:90%; height:auto; vertical-align: top">
+                <div id="viz1"></div>
+            </th>
+        </tr>
+      <!-- Row 1 - End -->
+      </table>
+      
+      <table>
+      <!-- Space between Row 1 & Row 2 - Begin -->
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+      <!-- Space between Row 1 & Row 2  - End -->
+      </table>
+      
+      <table style="width:100%; height:35%";>
+      <!-- Row 2 - Begin -->
+        <tr style="width:100%; height:auto; vertical-align: top">
+            <th style="width:50%; height:auto; vertical-align: top">
+                <div id="viz2"></div>
+            </th>
+
+            <th style="width:50%; height:auto; vertical-align: top">
+                <div id="viz3"></div>
+            </th>
+          </tr>
+      <!-- Row 2 - End -->
+    </table>
+
+    
+      <!-- <script src="logic.js"></script> -->
+                
+        
+    <!-- </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="well">
+          <h5>Test Subject ID No.:</h5>
+          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Demographic Info</h3>
+          </div>
+          <div id="sample-metadata" class="panel-body">
+            <table id="metadata">
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div id="bar"></div>
+      </div>
+      <div class="col-md-5">
+        <div id="gauge"></div>
+      </div> -->
+
+      
+      
+        <!-- <script src="logic.js"></script> -->
+      
+</body>
