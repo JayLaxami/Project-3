@@ -8,6 +8,7 @@ The field we are interested in working with is Covid vaccines. Covid has affecte
 We will scrape the dataset and will perform all the analysis including data visualizations for data sets. 
 
 Data Source: (https://www.kaggle.com/datasets/paultimothymooney/usa-covid19-vaccinations)
+             (https://ourworldindata.org/covid-vaccinations)
 
 Analysis
 
